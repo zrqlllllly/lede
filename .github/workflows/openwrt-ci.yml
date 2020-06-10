@@ -50,7 +50,14 @@ jobs:
           ./scripts/feeds install -a
 
       - name: Generate configuration file
-        run: make defconfig
+        run: |
+            #固件版本
+            cat >> .config <<EOF
+            CONFIG_TARGET_ramips=y
+            CONFIG_TARGET_ramips_mt7620=y
+            CONFIG_TARGET_ramips_mt7620_DEVICE_hc5661=y
+            EOF
+            make defconfig
 
       - name: Make download
         run: |
@@ -71,7 +78,7 @@ jobs:
 
       - name: Prepare artifact
         run: find ./bin/targets/ -type d -name "packages" | xargs rm -rf {}
-
+      
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
