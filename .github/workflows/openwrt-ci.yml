@@ -51,7 +51,7 @@ jobs:
 
       - name: Generate configuration file
         run: |
-            #固件版本
+            #固件版本，
             cat >> .config <<EOF
             CONFIG_TARGET_ramips=y
             CONFIG_TARGET_ramips_mt7620=y
